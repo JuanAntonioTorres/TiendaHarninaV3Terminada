@@ -1,14 +1,11 @@
 package dao.clienteDAO;
 
-import entity.ClientEntity;
-import entity.CodigoPostalEntity;
+import entity.ClienteEntity;
 import entity.LoginClienteEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 
 public class ClienteDAO {
 
@@ -31,7 +28,7 @@ public class ClienteDAO {
         return provincias;
     }
 
-   public int add_cliente(ClientEntity cliente) {
+   public int add_cliente(ClienteEntity cliente) {
        String sql = "INSERT INTO `cliente`(`NifCliente`, `ApellidosCliente`, `NombreCliente`, `CodigoPostalCliente`, `DomicilioCliente`, `FechaNacimiento`, `TelefonoCliente`, `MovilCliente`, `SexoCliente`, `EmailCliente`, `ImagenCliente`, `UsuarioCliente`, `PasswordCliente`) " + " VALUES ('" + cliente.getNifCliente() + "','" +
                cliente.getApellidosCliente()+ "','" +
                cliente.getNombreCliente()+ "','" +
@@ -57,9 +54,9 @@ public class ClienteDAO {
         }
     }
 
-   public boolean add_cliente_procedure (ClientEntity clientEntity) {
+   public boolean add_cliente_procedure (ClienteEntity clientEntity) {
         try {
-            return clienteRoll.add_cliente(clientEntity.getNifCliente(),clientEntity.getApellidosCliente(),clientEntity.getNombreCliente(), clientEntity.getCodigoPostalClient(),clientEntity.getDomicilioCliente(),clientEntity.getFechaNacimiento(), clientEntity.getTelefonoCliente(),clientEntity.getMovilCliente(),clientEntity.getSexoCliente(),clientEntity.getEmailCliente(), clientEntity.getImagenCliente(),clientEntity.getUsuarioCliente(),clientEntity.getPasswordCliente());
+            return clienteRoll.add_cliente(clientEntity);
         } catch (SQLException e) {
             System.out.println("DAO false");
             return false;

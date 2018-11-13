@@ -7,6 +7,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="tiendav2.1.1" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate 5.3.7-5.3.7" />
+          <element id="library" level="project" name="mysql:mysql-connector-java:5.1.47" />
+        </element>
       </element>
     </root>
   </artifact>

@@ -1,7 +1,6 @@
 package controller;
 
 import dao.clienteDAO.ClienteDAO;
-import entity.ClientEntity;
 import entity.LoginClienteEntity;
 import validate.IValidacion;
 import validate.ValidacionMultiValidation;
@@ -16,11 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static validate.ValidacionMultiValidation.validar;
 
 @WebServlet("/valiCliSesion")
 public class ValidarClientSessionController extends HttpServlet {

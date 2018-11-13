@@ -48,49 +48,49 @@
 
             <div id="div_dniCliente">
                 <label for="dniCliente">dni:</label>
-                <input class="etiqueta s8" id="dniCliente" name = "dniCliente" value="<%= session.getAttribute("dniCliente") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarDniNieCif" required placeholder="input your dni" title="dni">
+                <input class="etiqueta s8" id="dniCliente" name = "nifCliente" value="<%= session.getAttribute("nifCliente") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarDniNieCif" required placeholder="input your dni" title="dni">
             </div>
 
             <div id="div_clientFirstName">
                 <label class="labelInput" for="clientFirstName">Nombre:</label>
-                <input class="etiqueta s8" id="clientFirstName" name ="clientFirstName" value="<%= (session.getAttribute("clientFirstName")!= "null")? session.getAttribute("clientFirstName"): "" %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarLetrasConEspacio" size="24" minlength="3" maxlength="80" required placeholder="input your FirstName" title="3 to 50 characters">
+                <input class="etiqueta s8" id="clientFirstName" name ="nombreCliente" value="<%= (session.getAttribute("nombreCliente")!= "null")? session.getAttribute("clientFirstName"): "" %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarLetrasConEspacio" size="24" minlength="3" maxlength="80" required placeholder="input your FirstName" title="3 to 50 characters">
             </div>
 
             <div id="div_clientLastName">
                 <label class="labelInput" for="clientLastName">Apellidos:</label>
-                <input class="etiqueta s8" id="clientLastName" name="clientLastName" value="<%= session.getAttribute("clientLastName") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarLetrasConEspacio" minlength="5" maxlength="100" required placeholder="input your LastName" title="3 to 70 characters">
+                <input class="etiqueta s8" id="clientLastName" name="apellidosCliente" value="<%= session.getAttribute("apellidosCliente") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarLetrasConEspacio" minlength="5" maxlength="100" required placeholder="input your LastName" title="3 to 70 characters">
             </div>
 
             <div id="div_clientCP">
                 <label class="labelInput" for="clientCP">C P:</label>
-                <input class="etiqueta s8" id="clientCP" name="clientCP" value="<%= session.getAttribute("clientCP") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarCodigoPostal" required placeholder="input your cp" title="5 characters">
+                <input class="etiqueta s8" id="clientCP" name="codigoPostalClient" value="<%= session.getAttribute("codigoPostalClient") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarCodigoPostal" required placeholder="input your cp" title="5 characters">
             </div>
 
             <div id="div_DomicilioCliente">
                 <label class="labelInput" for="DomicilioCliente">Domicilio:</label>
-                <input class="etiqueta s8" id="DomicilioCliente" name="DomicilioCliente" value="<%= session.getAttribute("DomicilioCliente") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarDomicilio" minlength="2" maxlength="100" required placeholder="Adress" title="5 characters">
+                <input class="etiqueta s8" id="DomicilioCliente" name="domicilioCliente" value="<%= session.getAttribute("domicilioCliente") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarDomicilio" minlength="2" maxlength="100" required placeholder="Adress" title="5 characters">
             </div>
 
             <div id="div_FechaNacimiento">
                 <label class="labelInput" for="FechaNacimiento">Fecha Nacimiento:</label>
-                <input class="etiqueta s8" id="FechaNacimiento" name="FechaNacimiento" value="<%= session.getAttribute("FechaNacimiento") %>" type="date" data-functioncallback="ValidacionExpresionRegular.validarFecha"  required placeholder="Adress" title="5 characters">
+                <input class="etiqueta s8" id="FechaNacimiento" name="fechaNacimiento" value="<%= session.getAttribute("fechaNacimiento") %>" type="date" data-functioncallback="ValidacionExpresionRegular.validarFecha"  required placeholder="Adress" title="5 characters">
             </div>
 
             <div id="div_TelefonoFijo">
                 <label for="TelefonoFijo">tlf. fijo:</label>
                 <select id="prefijoFijo"></select>
-                <input class="etiqueta s8" id="TelefonoFijo" name="TelefonoFijo" value="<%= session.getAttribute("TelefonoFijo") %>" type="tel" data-functioncallback="ValidacionExpresionRegular.validarTelefonoFijo" size="20" required placeholder="Tlf Fijo" title="Tlf Fijo">
+                <input class="etiqueta s8" id="TelefonoFijo" name="telefonoCliente" value="<%= session.getAttribute("telefonoCliente") %>" type="tel" data-functioncallback="ValidacionExpresionRegular.validarTelefonoFijo" size="20" required placeholder="Tlf Fijo" title="Tlf Fijo">
             </div>
 
             <div id="div_numeroMovil">
                 <label for="numeroMovil">tlf. móvil:</label>
                 <select id="prefijo"></select>
-                <input class="etiqueta s8" id="numeroMovil" name="numeroMovil" value="<%= session.getAttribute("numeroMovil") %>" type="tel" data-functioncallback="ValidacionExpresionRegular.validarNumeroMovil" size="20" required placeholder="longitud" title="">
+                <input class="etiqueta s8" id="numeroMovil" name="movilCliente" value="<%= session.getAttribute("movilCliente") %>" type="tel" data-functioncallback="ValidacionExpresionRegular.validarNumeroMovil" size="20" required placeholder="longitud" title="">
             </div>
 
             <div id="div_clientSexo">
                 <label class="labelInput" for="clientSexo">Sexo:</label>
-                <select class="etiqueta s8 file" id="clientSexo" name="clientSexo" value="<%= session.getAttribute("clientSexo") %>" data-functioncallback="ValidarListaValores.validarSexo">
+                <select class="etiqueta s8 file" id="clientSexo" name="sexoCliente" value="<%= session.getAttribute("sexoCliente") %>" data-functioncallback="ValidarListaValores.validarSexo">
                     <option value="">-- Select Sexo --</option>
                     <option value="m">Hombre</option>
                     <option value="f">Mujer</option>
@@ -104,16 +104,16 @@
 
             <div id="div_clientUsuario">
                 <label class="labelInput" for="clientUsuario">Usuario:</label>
-                <input class="etiqueta s8" id="clientUsuario" name ="clientUsuario" value="<%= session.getAttribute("clientUsuario") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarUsuario" size="24" minlength="7" maxlength="7" required placeholder="input your User" title="3 to 50 characters">
+                <input class="etiqueta s8" id="clientUsuario" name ="usuarioCliente" value="<%= session.getAttribute("usuarioCliente") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarUsuario" size="24" minlength="7" maxlength="7" required placeholder="input your User" title="3 to 50 characters">
             </div>
 
             <div id="div_password">
                 <label for="password">Password:</label>
-                <input class="etiqueta s8" id="password" name ="password" value="<%= session.getAttribute("password") %>" type="password" placeholder="Contraseña" data-functioncallback="ValidacionExpresionRegular.validarPassword">
+                <input class="etiqueta s8" id="password" name ="passwordCliente" value="<%= session.getAttribute("passwordCliente") %>" type="password" placeholder="Contraseña" data-functioncallback="ValidacionExpresionRegular.validarPassword">
             </div>
 
             <div class="fileinputs etiqueta s8" id="div_clientImage">
-                <input class="etiqueta s8 file" id="clientImage" type="file" name="clientImage" data-functioncallback="ValidarFicheroName.validarImagenName" required accept="image/png, image/jpeg" placeholder="input your Avatar" title="3 to 120 characters">
+                <input class="etiqueta s8 file" id="clientImage" type="file" name="imagenCliente" data-functioncallback="ValidarFicheroName.validarImagenName" required accept="image/png, image/jpeg" placeholder="input your Avatar" title="3 to 120 characters">
                 <div class="fakefile">
                     <label class="labelInput" for="idFile">Elije tu foto</label>
                     <input id="idFile" name="myFile">

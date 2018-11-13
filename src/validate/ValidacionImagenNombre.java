@@ -15,7 +15,7 @@ public class ValidacionImagenNombre extends ValidacionMultiValidation implements
 
     public boolean validar(){
 
-       assertTrue(value.contains("."));
+        assertTrue(value.contains("."));
 
         String nombreImagen = new String(value.substring(0 , value.lastIndexOf('.')));
 
