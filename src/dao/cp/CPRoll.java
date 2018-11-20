@@ -18,16 +18,16 @@ public class CPRoll {
     public CPRoll(String usu, String pas) {
 
         this.usuario = usu;
-        this.pass = pas;
 
+        this.pass = pas;
     }
 
     private void conectar() {
 
-
+        System.out.println("usu2:" + this.usuario + " pas2:" + this.pass);
         acceso = AccesoDB.getMiConexion();
         try {
-            acceso.conectar("com.mysql.cj.jdbc.Driver", //com.mysql.cj.jdbc.Driver",
+            acceso.conectar("com.mysql.jdbc.Driver", //com.mysql.cj.jdbc.Driver",
                     "jdbc:mysql://localhost/tienda_harnina20189vistas?useInformationSchema=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
                     this.usuario,
                     this.pass);

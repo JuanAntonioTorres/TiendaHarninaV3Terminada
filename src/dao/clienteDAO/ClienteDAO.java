@@ -1,9 +1,8 @@
 package dao.clienteDAO;
 
 import entity.ClienteEntity;
-import entity.LoginClienteEntity;
+import entity.LoginClienteHarnina;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,28 +10,11 @@ public class ClienteDAO {
 
     ClienteRoll clienteRoll = new ClienteRoll();
 
-   public ArrayList<String> getProvincias() throws SQLException, ClassNotFoundException{
-
-        ArrayList<String> provincias = new ArrayList<String>();
-
-        String sql = "SELECT * FROM provincia";
-
-        ResultSet rs =  clienteRoll.getCursor(sql);
-
-        while(rs.next())
-        {
-            String provincia = rs.getString("NombreProvincia");
-            provincias.add(provincia);
-        }
-
-        return provincias;
-    }
-
-   public int add_cliente(ClienteEntity cliente) {
+  public int add_cliente(ClienteEntity cliente) {
        String sql = "INSERT INTO `cliente`(`NifCliente`, `ApellidosCliente`, `NombreCliente`, `CodigoPostalCliente`, `DomicilioCliente`, `FechaNacimiento`, `TelefonoCliente`, `MovilCliente`, `SexoCliente`, `EmailCliente`, `ImagenCliente`, `UsuarioCliente`, `PasswordCliente`) " + " VALUES ('" + cliente.getNifCliente() + "','" +
                cliente.getApellidosCliente()+ "','" +
                cliente.getNombreCliente()+ "','" +
-               cliente.getCodigoPostalClient()+ "','" +
+               cliente.getCodigoPostalCliente()+ "','" +
                cliente.getDomicilioCliente()+ "','" +
                cliente.getFechaNacimiento()+ "','" +
                cliente.getTelefonoCliente()+ "','" +
@@ -54,7 +36,7 @@ public class ClienteDAO {
         }
     }
 
-   public boolean add_cliente_procedure (ClienteEntity clientEntity) {
+  public boolean add_cliente_procedure (ClienteEntity clientEntity) {
         try {
             return clienteRoll.add_cliente(clientEntity);
         } catch (SQLException e) {
@@ -62,11 +44,12 @@ public class ClienteDAO {
             return false;
         }
     }
-    public String  get_nif_login(LoginClienteEntity clientloginEntity) {
+
+  public String  get_nif_login(LoginClienteHarnina clientloginEntity) {
 
        try
        {
-           return clienteRoll.get_nif_login(clientloginEntity.getUsuario(),clientloginEntity.getPassword());
+           return clienteRoll.get_nif_login(clientloginEntity.getUsuarioCliente(),clientloginEntity.getPasswordCliente());
        }
        catch (Exception ignore)
        {
@@ -76,5 +59,21 @@ public class ClienteDAO {
        return "null";
     }
 
+  public ArrayList getListaClientes(){
+       return clienteRoll.getListaClientes();
+    }
 
+  public Boolean deleteClient(String nif) throws SQLException {
+      return clienteRoll.deleteClient(nif);
+  }
+
+  public boolean update_client_login(LoginClienteHarnina cliente) throws SQLException {
+      return clienteRoll.update_client_login(cliente);
+  }
+
+  public ClienteEntity getCliente(String dni) { return (ClienteEntity) clienteRoll.getCliente(dni);}
+
+    public boolean updateCliente(ClienteEntity cliente) throws SQLException {
+        return clienteRoll.updateCliente(cliente);
+    }
 }

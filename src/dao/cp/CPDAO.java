@@ -13,17 +13,15 @@ public class CPDAO {
 
     public CPDAO(String usu, String pas) {
 
+
+
         this.usuario = usu;
         this.pass = pas;
         cproll = new CPRoll(this.usuario,this.pass);
 
     }
 
-
-
     public ArrayList<String> get_lista_cp() throws SQLException {
-
-
         return   cproll.get_lista_cps();
     }
 

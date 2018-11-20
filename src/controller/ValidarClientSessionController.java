@@ -1,9 +1,8 @@
 package controller;
 
+import cliente.DataLoginCliente;
 import dao.clienteDAO.ClienteDAO;
-import entity.LoginClienteEntity;
-import validate.IValidacion;
-import validate.ValidacionMultiValidation;
+import utils.GuardadorDeObjetoEnSession;
 import validate.ValidacionPassword;
 import validate.ValidacionUsuario;
 
@@ -15,8 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
 
 @WebServlet("/valiCliSesion")
 public class ValidarClientSessionController extends HttpServlet {
@@ -29,52 +27,65 @@ public class ValidarClientSessionController extends HttpServlet {
 
         session = request.getSession();
 
-        LoginClienteEntity cliente = new LoginClienteEntity();
-
         request.setCharacterEncoding("UTF-8");
 
         response.setContentType("text/html");
 
-        String error = "";
+        RequestDispatcher rd = request.getRequestDispatcher("cliente/clientSesion.jsp");
 
-        List<IValidacion> validador = new ArrayList<IValidacion>();
+        DataLoginCliente dataSessionCliente = null;
 
-        RequestDispatcher rd = request.getRequestDispatcher("clientSession.jsp");
-        cliente.setUsuario(request.getParameter("clientUsuario"));
-        session.setAttribute("clientUsuario", cliente.getUsuario());
-        validador.add(new ValidacionUsuario(cliente.getUsuario()));
-        error += ValidacionMultiValidation.validar(validador);
-        if (!(error.length() > 0)) {
-            validador.clear();
-            cliente.setPassword(request.getParameter("password"));
-            session.setAttribute("password", cliente.getPassword());
-            validador.add(new ValidacionPassword(cliente.getPassword()));
-            error += ValidacionMultiValidation.validar(validador);
+        try {
+            dataSessionCliente = new DataLoginCliente(request);
+
+        } catch (InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
         }
-        if (error.length() > 0){
-            request.setAttribute("error", error);
-        }else {
 
-            request.setAttribute("error", "Validado ok");
+        ValidacionUsuario validacionUsuario = new ValidacionUsuario(dataSessionCliente.getUsuarioCliente());
+        if(validacionUsuario.validar()) {
 
-            ClienteDAO clienteDAO = new ClienteDAO();
+            ValidacionPassword validacionPassword = new ValidacionPassword(dataSessionCliente.getPasswordCliente());
 
-            String login = clienteDAO.get_nif_login(cliente);
-            System.out.println("login:" + login);
+            if(validacionPassword.validar()){
 
-            if (login != "null"){
+                //verificamos si está en BD
+                ClienteDAO clienteDAO = new ClienteDAO();
 
-                session.setAttribute("nif", login);
-                login = ("Hola ").concat(login);
-                request.setAttribute("mensaje", login);
+                String dni = clienteDAO.get_nif_login(dataSessionCliente.getLoginClienteEntity());
+                session.setAttribute("nifClient",dni);
 
-            }
-            else request.setAttribute("mensaje", "Cliente NO login");
+                if (!dni.equals("null")){
 
-            rd = request.getRequestDispatcher("cliente/clienteIndex.jsp");
+                    request.setAttribute("mensaje", ("Hola ").concat(dni));
 
-            rd.forward(request, response);
-        }
+                    String opcion = request.getParameter("opcion");
+
+                    if(opcion.equals("clientUpdateDaper")){
+                        try {
+                            new GuardadorDeObjetoEnSession().guardar(session , new ClienteDAO().getCliente(dni));
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    String url;
+
+                    if (opcion.equals("null")) url = "cliente/clienteIndex.jsp";
+                    else url = "cliente/" + opcion + ".jsp";
+
+                    rd = request.getRequestDispatcher(url);
+
+                }else request.setAttribute("mensaje", "Cliente NO coincide login");
+
+            }else request.setAttribute("mensaje", validacionPassword.getError());
+
+        } else request.setAttribute("mensaje", validacionUsuario.getError());
+
+        rd.forward(request, response);
+
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);

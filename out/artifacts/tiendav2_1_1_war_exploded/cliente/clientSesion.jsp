@@ -31,26 +31,34 @@
         <div class="dado d3 harnina"></div>
     </div>
 </div>
-<c:if test="${not empty error}">
-<div class="etiqueta s8">
-        ${error}
-</div>
+<c:if test="${not empty mensaje}">
+    <div class="etiqueta s8">
+            ${mensaje}
+    </div>
 </c:if>
+<%
+    String opcion = request.getParameter("opcion");
+    String operacion = request.getParameter("operacion");
+%>
+
 
 
 <div class="contenido01">
     <form enctype="multipart/form-data" id="client_register" method="get" action="/valiCliSesion">
+
+        <input type="hidden" value = '<%=opcion%>' name = "opcion">
+
         <div class="menu s3 caja03">
-            <h4>New Client</h4>
+            <h4><%=operacion%> Session</h4>
 
             <div id="div_clientUsuario">
                 <label class="labelInput" for="clientUsuario">Usuario:</label>
-                <input class="etiqueta s8" id="clientUsuario" name ="clientUsuario" value="<%= session.getAttribute("clientUsuario") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarUsuario" size="24" minlength="7" maxlength="7" required placeholder="input your User" title="3 to 50 characters">
+                <input class="etiqueta s8" id="clientUsuario" name ="usuarioCliente"  type="text" data-functioncallback="ValidacionExpresionRegular.validarUsuario" size="24" minlength="7" maxlength="7" required placeholder="input your User" title="3 to 50 characters">
             </div>
 
             <div id="div_password">
                 <label for="password">Password:</label>
-                <input class="etiqueta s8" id="password" name ="password" value="<%= session.getAttribute("password") %>" type="password" placeholder="Contraseña" data-functioncallback="ValidacionExpresionRegular.validarPassword">
+                <input class="etiqueta s8" id="password" name ="passwordCliente"  type="password" placeholder="Contraseña" data-functioncallback="ValidacionExpresionRegular.validarPassword">
             </div>
             <div class="etiqueta errorColor" id="alertaError">Error:</div>
             <button id="submit" type="submit">Enviar</button>

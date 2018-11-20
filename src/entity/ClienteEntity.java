@@ -1,8 +1,6 @@
 package entity;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpSession;
-import java.lang.reflect.Field;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -15,6 +13,7 @@ public class ClienteEntity {
     private String apellidosCliente;
     private String nombreCliente;
     private String domicilioCliente;
+    private String codigoPostalCliente;
     private String fechaNacimiento;
     private String telefonoCliente;
     private String movilCliente;
@@ -23,23 +22,12 @@ public class ClienteEntity {
     private String imagenCliente;
     private String usuarioCliente;
     private String passwordCliente;
-    private String codigoPostalClient;
     private Timestamp fechaAlta;
-
-
-    public ClienteEntity(HttpSession session) throws IllegalAccessException {
-        Field [] atributosCliente = this.getClass().getDeclaredFields();
-        for (int i = 0; i < atributosCliente.length; i++) {
-            atributosCliente[i].set(this,session.getAttribute(atributosCliente[i].getName()));
-        }
-    }
-
-    public ClienteEntity() {
-    }
-
+    private byte bloqueado;
+    private byte eliminado;
 
     @Id
-    @Column(name = "IdCliente", nullable = false)
+    @Column(name = "IdCliente")
     public int getIdCliente() {
         return idCliente;
     }
@@ -49,7 +37,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "NifCliente", nullable = false, length = 9)
+    @Column(name = "NifCliente")
     public String getNifCliente() {
         return nifCliente;
     }
@@ -59,7 +47,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "ApellidosCliente", nullable = false, length = 100)
+    @Column(name = "ApellidosCliente")
     public String getApellidosCliente() {
         return apellidosCliente;
     }
@@ -69,7 +57,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "NombreCliente", nullable = false, length = 50)
+    @Column(name = "NombreCliente")
     public String getNombreCliente() {
         return nombreCliente;
     }
@@ -79,7 +67,17 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "DomicilioCliente", nullable = false, length = 100)
+    @Column(name = "CodigoPostalCliente")
+    public String getCodigoPostalCliente() {
+        return codigoPostalCliente;
+    }
+
+    public void setCodigoPostalCliente(String codigoPostalCliente) {
+        this.codigoPostalCliente = codigoPostalCliente;
+    }
+
+    @Basic
+    @Column(name = "DomicilioCliente")
     public String getDomicilioCliente() {
         return domicilioCliente;
     }
@@ -89,7 +87,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "FechaNacimiento", nullable = false)
+    @Column(name = "FechaNacimiento")
     public String getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -99,7 +97,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "TelefonoCliente", nullable = false, length = 20)
+    @Column(name = "TelefonoCliente")
     public String getTelefonoCliente() {
         return telefonoCliente;
     }
@@ -109,7 +107,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "MovilCliente", nullable = false, length = 20)
+    @Column(name = "MovilCliente")
     public String getMovilCliente() {
         return movilCliente;
     }
@@ -119,7 +117,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "SexoCliente", nullable = false, length = 1)
+    @Column(name = "SexoCliente")
     public String getSexoCliente() {
         return sexoCliente;
     }
@@ -129,7 +127,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "EmailCliente", nullable = false, length = 150)
+    @Column(name = "EmailCliente")
     public String getEmailCliente() {
         return emailCliente;
     }
@@ -139,7 +137,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "ImagenCliente", nullable = false, length = 15)
+    @Column(name = "ImagenCliente")
     public String getImagenCliente() {
         return imagenCliente;
     }
@@ -149,7 +147,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "UsuarioCliente", nullable = false, length = 30)
+    @Column(name = "UsuarioCliente")
     public String getUsuarioCliente() {
         return usuarioCliente;
     }
@@ -159,7 +157,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "PasswordCliente", nullable = false, length = 50)
+    @Column(name = "PasswordCliente")
     public String getPasswordCliente() {
         return passwordCliente;
     }
@@ -169,7 +167,7 @@ public class ClienteEntity {
     }
 
     @Basic
-    @Column(name = "fechaAlta", nullable = false)
+    @Column(name = "fechaAlta")
     public Timestamp getFechaAlta() {
         return fechaAlta;
     }
@@ -178,12 +176,34 @@ public class ClienteEntity {
         this.fechaAlta = fechaAlta;
     }
 
+    @Basic
+    @Column(name = "bloqueado")
+    public byte getBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(byte bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
+    @Basic
+    @Column(name = "eliminado")
+    public byte getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(byte eliminado) {
+        this.eliminado = eliminado;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClienteEntity that = (ClienteEntity) o;
         return idCliente == that.idCliente &&
+                bloqueado == that.bloqueado &&
+                eliminado == that.eliminado &&
                 Objects.equals(nifCliente, that.nifCliente) &&
                 Objects.equals(apellidosCliente, that.apellidosCliente) &&
                 Objects.equals(nombreCliente, that.nombreCliente) &&
@@ -201,14 +221,6 @@ public class ClienteEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCliente, nifCliente, apellidosCliente, nombreCliente, domicilioCliente, fechaNacimiento, telefonoCliente, movilCliente, sexoCliente, emailCliente, imagenCliente, usuarioCliente, passwordCliente, fechaAlta);
-    }
-
-    public String getCodigoPostalClient() {
-        return codigoPostalClient;
-    }
-
-    public void setCodigoPostalClient(String codigoPostalClient) {
-        this.codigoPostalClient = codigoPostalClient;
+        return Objects.hash(idCliente, nifCliente, apellidosCliente, nombreCliente, domicilioCliente, fechaNacimiento, telefonoCliente, movilCliente, sexoCliente, emailCliente, imagenCliente, usuarioCliente, passwordCliente, fechaAlta, bloqueado, eliminado);
     }
 }

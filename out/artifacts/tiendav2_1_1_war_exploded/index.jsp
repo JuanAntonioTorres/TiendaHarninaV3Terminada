@@ -29,17 +29,17 @@
     </div>
   </div>
 
-
-  <c:if test="${not empty error}">
+  <c:if test="${not empty mensaje}">
     <div class="etiqueta s8">
         ${mensaje}
     </div>
   </c:if>
+
   <div class="contenedor01">
 
     <div class="contenido01">
       <div><a href="cliente/clientInsert.jsp">Añadir Cliente</a></div>
-      <div><a href="cliente/clientSesion.jsp">Iniciar Sesión</a></div>
+      <div><a href="cliente/clientSesion.jsp?operacion=New">Iniciar Sesión</a></div>
     </div>
 
   </div>

@@ -63,7 +63,7 @@
 
             <div id="div_clientCP">
                 <label class="labelInput" for="clientCP">C P:</label>
-                <input class="etiqueta s8" id="clientCP" name="codigoPostalClient" value="<%= session.getAttribute("codigoPostalClient") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarCodigoPostal" required placeholder="input your cp" title="5 characters">
+                <input class="etiqueta s8" id="clientCP" name="codigoPostalCliente" value="<%= session.getAttribute("codigoPostalClient") %>" type="text" data-functioncallback="ValidacionExpresionRegular.validarCodigoPostal" required placeholder="input your cp" title="5 characters">
             </div>
 
             <div id="div_DomicilioCliente">

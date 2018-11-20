@@ -30,17 +30,18 @@
 </div>
 
 
-<c:if test="${not empty error}">
+<c:if test="${not empty mensaje}">
     <div class="etiqueta s8">
             ${mensaje}
     </div>
 </c:if>
+
 <div class="contenedor01">
 
     <div class="contenido01">
-        <div><a href="cliente/clientUpdateLogin.jsp">Modificar Login </a></div>
-        <div><a href="cliente/clientUpdateDaper.jsp">Modificar Datos Personales</a></div>
-        <div><a href="cliente/clientDelete.jsp">Eliminar </a></div>
+        <div><a href="cliente/clientSesion.jsp?opcion=clientUpdateLogin&operacion=Confirmar">Modificar Login </a></div>
+        <div><a href="cliente/clientSesion.jsp?opcion=clientUpdateDaper&operacion=Confirmar">Modificar Datos Personales</a></div>
+        <div><a href="cliente/clientSesion.jsp?opcion=clientDelete&operacion=Confirmar">Eliminar </a></div>
     </div>
 
 </div>

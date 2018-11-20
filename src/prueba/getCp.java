@@ -13,21 +13,11 @@ public class getCp {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        ClienteDAO cpdao = new ClienteDAO();
-        //ArrayList<String> listaCP = cpdao.get_lista_cp();
+      CPDAO cpdao = new CPDAO("root", "");
 
-       /* Iterator<String> nombreIterator = listaCP.iterator();
-        int i=0;
-        System.out.println("Total cp:" + listaCP.size());
-       /* while(nombreIterator.hasNext()){
-            i++;
-            nombreIterator.next();
-           // CodigoPostalEntity elemento = nombreIterator.next();
-          //  System.out.print(elemento.getCodigoPostal()+" / ");
-        }
-        System.out.println("Total cp:" + i);*/
-        String cp ="06200";
-        System.out.println("Existe cp:" + cpdao.getProvincias());
+        ArrayList<String> a = null;
+        a = cpdao.get_lista_cp();
+        System.out.println("Existe cp:" );
 
     }
 

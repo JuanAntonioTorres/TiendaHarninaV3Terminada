@@ -1,10 +1,11 @@
-package controller;
+package utils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 
 public class GuardadorDeRequesParamsEnSession {
+
 
     public void guardarDatosSesion(HttpServletRequest request, HttpSession session) {
 
